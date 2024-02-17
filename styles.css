@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.board {
+    position: relative;
+    padding: 10px;
+    width: 80vmin;
+    height: 80vmin;
+    background-color: #eee;
+    box-shadow: inset 0 0 20px 10px #77777732;
+    border: 1vmin solid #77777732;
+}
+
+.card {
+    position: absolute;
+    inset: 0;
+    margin: 1vmin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: lightskyblue;
+}
+
+.clickable:hover {
+    outline: 2px solid red
+}
