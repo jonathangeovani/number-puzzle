@@ -42,11 +42,33 @@
     /* background: url(./IMG_01.JPG); */
 }
 
-.clickable:hover {
-    outline: 2px solid red;
+.btn {
+    margin: 20px 10px;
+    padding: 7px 15px;
+
+    color: rgb(0, 42, 0);
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(127, 201, 155);
+
     cursor: pointer;
 }
+.btn:active {
+    background-color: rgb(100, 180, 130);
+}
 
-.btn {
-    background: linear-gradient(#429fb6, #eee);
+@media only screen and (min-width: 700px) {
+    .clickable:hover {
+        outline: 2px solid red;
+        cursor: pointer;
+    }
+
+    .btn:hover {
+        outline: 1px solid black;
+    }
 }
