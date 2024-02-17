@@ -12,10 +12,12 @@ export function createCard(id, position) {
   card.className = "card";
   card.id = `card_${id}`;
   card.innerText = id;
+
   card.style.width = `calc(100% / ${BOARD_WIDTH} - 2vmin)`;
   card.style.height = `calc(100% / ${BOARD_WIDTH} - 2vmin)`;
   card.style.top = `${(position.y * 100) / BOARD_WIDTH}%`;
   card.style.left = `${(position.x * 100) / BOARD_WIDTH}%`;
+
   card.onclick = handleCardClick;
 
   return card;

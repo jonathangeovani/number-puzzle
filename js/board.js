@@ -1,6 +1,6 @@
 import { createCard } from "./card.js";
 
-export const BOARD_SIZE = 9;
+export const BOARD_SIZE = 16;
 export const BOARD_WIDTH = Math.sqrt(BOARD_SIZE);
 const BOARD_END = BOARD_WIDTH - 1;
 

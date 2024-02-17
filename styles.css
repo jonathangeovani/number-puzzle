@@ -37,8 +37,9 @@
     font-family: "Roboto", sans-serif;
     font-size: clamp(10px, 4.5vmin, 25px);
     font-weight: 700;
-    
+
     background-color: lightskyblue;
+    /* background: url(./IMG_01.JPG); */
 }
 
 .clickable:hover {
