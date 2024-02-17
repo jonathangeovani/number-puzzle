@@ -1,11 +1,11 @@
 import { createCard } from "./card.js";
 
-export const BOARD_SIZE = 36;
+export const BOARD_SIZE = 9;
 export const BOARD_WIDTH = Math.sqrt(BOARD_SIZE);
 const BOARD_END = BOARD_WIDTH - 1;
 
 const board = document.getElementById("board");
-const boardCards = createBoardCards(BOARD_WIDTH);
+let boardCards = createBoardCards(BOARD_WIDTH);
 
 function createBoardCards(size = 3) {
   const boardItems = [];
@@ -85,4 +85,37 @@ export function updateCardPosition(cardId, newPos) {
       }
     }
   }
+}
+
+export function shuffleCards() {
+  const matrix = boardCards;
+  let m = matrix.length,
+    n = matrix[0].length;
+
+  // Flatten the matrix into a 1D array
+  let flatMatrix = matrix.flat();
+
+  // Find the index of element 9
+  let spaceIndex = flatMatrix.indexOf(0);
+
+  // Fisher-Yates shuffle algorithm while keeping element 9 at its original position
+  for (let i = flatMatrix.length - 1; i > 0; i--) {
+    if (i === spaceIndex) {
+      continue; // Skip shuffling if it's the position of element 9
+    }
+    const j = Math.floor(Math.random() * (i + 1));
+    if (j === spaceIndex) {
+      continue; // Skip shuffling if it's the position of element 9
+    }
+    [flatMatrix[i], flatMatrix[j]] = [flatMatrix[j], flatMatrix[i]];
+  }
+
+  // Reshape the 1D array back into a matrix
+  let shuffledMatrix = [];
+  for (let i = 0; i < m; i++) {
+    shuffledMatrix.push(flatMatrix.slice(i * n, (i + 1) * n));
+  }
+
+  boardCards = shuffledMatrix;
+  updateBoard();
 }
