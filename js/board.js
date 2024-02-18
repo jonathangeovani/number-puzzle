@@ -1,4 +1,5 @@
 import { createCard } from "./card.js";
+import { game } from "./script.js";
 
 let boardSize;
 let boardWidth;
@@ -97,8 +98,9 @@ export function updateCardPosition(cardId, newPos) {
 
   const finished = checkIfBoardIsFinished();
 
-  if (finished) {
+  if (finished && !game.solved) {
     board.classList.add("win");
+    game.solved = true;
   }
 }
 
