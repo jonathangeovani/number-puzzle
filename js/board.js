@@ -3,9 +3,9 @@ import { createCard } from "./card.js";
 let boardSize;
 let boardWidth;
 let boardEnd;
+let boardCards = [];
 
 const board = document.getElementById("board");
-let boardCards = [];
 
 export function createBoard(size = 3) {
   const boardItems = [];
@@ -27,6 +27,7 @@ export function createBoard(size = 3) {
   }
 
   boardCards = boardItems;
+  board.classList.remove("win");
 }
 
 export function updateBoard() {
@@ -93,6 +94,12 @@ export function updateCardPosition(cardId, newPos) {
       }
     }
   }
+
+  const finished = checkIfBoardIsFinished();
+
+  if (finished) {
+    board.classList.add("win");
+  }
 }
 
 export function shuffleCards() {
@@ -126,4 +133,27 @@ export function shuffleCards() {
 
   boardCards = shuffledMatrix;
   updateBoard();
+}
+
+function checkIfBoardIsFinished() {
+  const numRows = boardCards.length;
+  const numCols = boardCards[0].length;
+  let lastElem = 0;
+
+  // Check if each row is ordered
+  for (let i = 0; i < numRows; i++) {
+    for (let j = 0; j < numCols; j++) {
+      if (boardCards[i][j] > lastElem) {
+        lastElem = boardCards[i][j];
+      } else if (boardCards[i][j] != 0) {
+        return false;
+      }
+    }
+  }
+
+  if (boardCards[numRows - 1][numCols - 1] != 0) {
+    return false;
+  }
+
+  return true;
 }
