@@ -1,19 +1,23 @@
 import { createCard } from "./card.js";
 
-export const BOARD_SIZE = 16;
-export const BOARD_WIDTH = Math.sqrt(BOARD_SIZE);
-const BOARD_END = BOARD_WIDTH - 1;
+let boardSize;
+let boardWidth;
+let boardEnd;
 
 const board = document.getElementById("board");
-let boardCards = createBoardCards(BOARD_WIDTH);
+let boardCards = [];
 
-function createBoardCards(size = 3) {
+export function createBoard(size = 3) {
   const boardItems = [];
   let currentPos = 1;
+  boardSize = size * size;
+  boardWidth = size;
+  boardEnd = size - 1;
+
   for (let row = 0; row < size; row++) {
     boardItems.push([]);
     for (let col = 0; col < size; col++) {
-      if (currentPos != BOARD_SIZE) {
+      if (currentPos != boardSize) {
         boardItems[row][col] = currentPos;
       } else {
         boardItems[row][col] = 0;
@@ -22,7 +26,12 @@ function createBoardCards(size = 3) {
     }
   }
 
-  return boardItems;
+  boardCards = boardItems;
+}
+
+export function updateBoard() {
+  board.innerHTML = "";
+  insertCards();
 }
 
 function insertCards() {
@@ -44,14 +53,13 @@ function insertCards() {
   }
 }
 
-export function updateBoard() {
-  board.innerHTML = "";
-  insertCards();
+export function getBoardWidth() {
+  return boardWidth;
 }
 
 export function getPosition(cardNumber) {
-  for (let row = 0; row <= BOARD_END; row++) {
-    for (let col = 0; col <= BOARD_END; col++) {
+  for (let row = 0; row <= boardEnd; row++) {
+    for (let col = 0; col <= boardEnd; col++) {
       if (boardCards[row][col] == cardNumber) {
         return { x: col, y: row };
       }
@@ -65,9 +73,9 @@ export function checkIfCanMove(cardPosition) {
 
   if (cardRow != 0 && boardCards[cardRow - 1][cardCol] == 0) {
     return "top";
-  } else if (cardCol != BOARD_END && boardCards[cardRow][cardCol + 1] == 0) {
+  } else if (cardCol != boardEnd && boardCards[cardRow][cardCol + 1] == 0) {
     return "right";
-  } else if (cardRow != BOARD_END && boardCards[cardRow + 1][cardCol] == 0) {
+  } else if (cardRow != boardEnd && boardCards[cardRow + 1][cardCol] == 0) {
     return "bottom";
   } else if (cardCol != 0 && boardCards[cardRow][cardCol - 1] == 0) {
     return "left";
@@ -77,8 +85,8 @@ export function checkIfCanMove(cardPosition) {
 export function updateCardPosition(cardId, newPos) {
   const card = document.getElementById(cardId);
 
-  for (let row = 0; row < BOARD_WIDTH; row++) {
-    for (let col = 0; col < BOARD_WIDTH; col++) {
+  for (let row = 0; row < boardWidth; row++) {
+    for (let col = 0; col < boardWidth; col++) {
       if (boardCards[row][col] == card.innerText) {
         boardCards[row][col] = 0;
         boardCards[newPos.y][newPos.x] = card.innerText;

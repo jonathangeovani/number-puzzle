@@ -16,6 +16,22 @@
     align-items: center;
 }
 
+label,
+.game-mode,
+.card,
+.btn {
+    font-family: "Roboto", sans-serif;
+}
+
+.game-mode {
+    margin: 20px 4px;
+    padding: 4px 8px;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
 .board {
     position: relative;
     padding: 10px;
@@ -34,7 +50,6 @@
     justify-content: center;
     align-items: center;
 
-    font-family: "Roboto", sans-serif;
     font-size: clamp(10px, 4.5vmin, 25px);
     font-weight: 700;
 
@@ -47,7 +62,6 @@
     padding: 7px 15px;
 
     color: rgb(0, 42, 0);
-    font-family: "Roboto", sans-serif;
     font-size: 14px;
     font-weight: 700;
     text-transform: uppercase;

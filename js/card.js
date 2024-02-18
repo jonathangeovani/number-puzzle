@@ -1,5 +1,5 @@
 import {
-  BOARD_WIDTH,
+  getBoardWidth,
   updateCardPosition,
   getPosition,
   checkIfCanMove,
@@ -7,16 +7,17 @@ import {
 } from "./board.js";
 
 export function createCard(id, position) {
+  const boardWidth = getBoardWidth();
   const card = document.createElement("div");
 
   card.className = "card";
   card.id = `card_${id}`;
   card.innerText = id;
 
-  card.style.width = `calc(100% / ${BOARD_WIDTH} - 2vmin)`;
-  card.style.height = `calc(100% / ${BOARD_WIDTH} - 2vmin)`;
-  card.style.top = `${(position.y * 100) / BOARD_WIDTH}%`;
-  card.style.left = `${(position.x * 100) / BOARD_WIDTH}%`;
+  card.style.width = `calc(100% / ${boardWidth} - 2vmin)`;
+  card.style.height = `calc(100% / ${boardWidth} - 2vmin)`;
+  card.style.top = `${(position.y * 100) / boardWidth}%`;
+  card.style.left = `${(position.x * 100) / boardWidth}%`;
 
   card.onclick = handleCardClick;
 
