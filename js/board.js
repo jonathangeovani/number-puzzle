@@ -134,7 +134,48 @@ export function shuffleCards() {
   }
 
   boardCards = shuffledMatrix;
-  updateBoard();
+
+  if (isSolvable()) {
+    updateBoard();
+  } else {
+    shuffleCards();
+  }
+}
+
+function isSolvable() {
+  let inversionCount = 0;
+  const flattenedBoard = boardCards.flat();
+
+  // Count inversions
+  for (let i = 0; i < flattenedBoard.length; i++) {
+    for (let j = i + 1; j < flattenedBoard.length; j++) {
+      // Ignore the blank space represented by 0
+      if (
+        flattenedBoard[i] !== 0 &&
+        flattenedBoard[j] !== 0 &&
+        flattenedBoard[i] > flattenedBoard[j]
+      ) {
+        inversionCount++;
+      }
+    }
+  }
+
+  // For an NxN puzzle with an odd grid width, the puzzle is solvable if inversion count is even
+  // For an NxN puzzle with an even grid width, the puzzle is solvable if:
+  // - the blank tile is on an even row counting from the bottom (0-indexed), and the inversion count is odd
+  // - OR the blank tile is on an odd row counting from the bottom (0-indexed), and the inversion count is even
+  const gridSize = boardCards.length;
+  const blankIndex = flattenedBoard.indexOf(0);
+  const blankRowFromBottom = gridSize - Math.floor(blankIndex / gridSize);
+
+  if (gridSize % 2 === 1) {
+    return inversionCount % 2 === 0;
+  } else {
+    return (
+      (blankRowFromBottom % 2 === 0 && inversionCount % 2 === 1) ||
+      (blankRowFromBottom % 2 === 1 && inversionCount % 2 === 0)
+    );
+  }
 }
 
 function checkIfBoardIsFinished() {
