@@ -91,14 +91,12 @@ export function updateCardPosition(cardId, newPos) {
     for (let col = 0; col < boardWidth; col++) {
       if (boardCards[row][col] == card.innerText) {
         boardCards[row][col] = 0;
-        boardCards[newPos.y][newPos.x] = card.innerText;
+        boardCards[newPos.y][newPos.x] = parseInt(card.innerText);
       }
     }
   }
 
-  const finished = checkIfBoardIsFinished();
-
-  if (finished && !game.solved) {
+  if (isFinished() && !game.solved) {
     board.classList.add("win");
     game.solved = true;
   }
@@ -106,8 +104,8 @@ export function updateCardPosition(cardId, newPos) {
 
 export function shuffleCards() {
   const matrix = boardCards;
-  let m = matrix.length,
-    n = matrix[0].length;
+  let m = matrix.length;
+  let n = matrix[0].length;
 
   // Flatten the matrix into a 1D array
   let flatMatrix = matrix.flat();
@@ -178,7 +176,7 @@ function isSolvable() {
   }
 }
 
-function checkIfBoardIsFinished() {
+function isFinished() {
   const numRows = boardCards.length;
   const numCols = boardCards[0].length;
   let lastElem = 0;
