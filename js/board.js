@@ -5,6 +5,7 @@ let boardSize;
 let boardWidth;
 let boardEnd;
 let boardCards = [];
+let initialBoard = [];
 
 const board = document.getElementById("board");
 
@@ -28,6 +29,7 @@ export function createBoard(size = 3) {
   }
 
   boardCards = boardItems;
+  initialBoard = boardItems;
   board.classList.remove("win");
 }
 
@@ -59,10 +61,20 @@ export function getBoardWidth() {
   return boardWidth;
 }
 
-export function getPosition(cardNumber) {
+export function getCurrentPosition(cardNumber) {
   for (let row = 0; row <= boardEnd; row++) {
     for (let col = 0; col <= boardEnd; col++) {
       if (boardCards[row][col] == cardNumber) {
+        return { x: col, y: row };
+      }
+    }
+  }
+}
+
+export function getInitialPosition(cardNumber) {
+  for (let row = 0; row <= boardEnd; row++) {
+    for (let col = 0; col <= boardEnd; col++) {
+      if (initialBoard[row][col] == cardNumber) {
         return { x: col, y: row };
       }
     }

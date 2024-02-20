@@ -11,14 +11,21 @@
 
 <body>
     <div class="container">
-        <label for="game_mode">Mode:
-            <select name="game-mode" class="game-mode" id="game_mode">
-                <option value="3">Easy</option>
-                <option value="4">Medium</option>
-                <option value="5">Hard</option>
-                <option value="6">Expert</option>
-            </select>
-        </label>
+        <div class="config-section">
+            <label for="game_mode">Mode:
+                <select name="game-mode" class="game-mode" id="game_mode">
+                    <option value="3">Easy</option>
+                    <option value="4">Medium</option>
+                    <option value="5">Hard</option>
+                    <option value="6">Expert</option>
+                </select>
+            </label>
+            <label for="game_image" class="game-image">UPLOAD IMAGE
+                <input type="file" name="game-image" id="game_image" accept="image/*"
+                    style="visibility: hidden; width: 0;">
+            </label>
+            <span id="img_loaded" class="img-loaded"></span>
+        </div>
         <div class="board" id="board">
         </div>
         <button type="button" class="btn btn-primary" id="shuffle_btn">Shuffle</button>

@@ -16,8 +16,31 @@ gameMode.addEventListener("change", () => {
   game.solved = true;
 });
 
+const gameImage = document.getElementById("game_image");
+const imgLoadedText = document.getElementById("img_loaded");
+gameImage.addEventListener("change", () => {
+  if (game.image) window.URL.revokeObjectURL(game.image);
+  game.image = window.URL.createObjectURL(gameImage.files[0]);
+  imgLoadedText.innerText = gameImage.value.replace(/.*\\/, "");
+  imgLoadedText.classList.add("loaded");
+
+  createBoard(game.mode);
+  updateBoard();
+  game.solved = true;
+});
+
+imgLoadedText.onclick = () => {
+  game.image = null;
+  imgLoadedText.innerText = "";
+  imgLoadedText.classList.remove("loaded");
+  createBoard(game.mode);
+  updateBoard();
+  game.solved = true;
+};
+
 export const game = {
   mode: gameMode.value,
+  image: null,
   solved: true,
 };
 

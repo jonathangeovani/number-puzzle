@@ -16,8 +16,18 @@
     align-items: center;
 }
 
+.config-section {
+    width: 80vmin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
 label,
 .game-mode,
+.img-loaded,
 .board,
 .card,
 .btn {
@@ -25,15 +35,21 @@ label,
 }
 
 .game-mode {
-    margin: 20px 4px;
     padding: 4px 8px;
-
     border-radius: 5px;
+    cursor: pointer;
+}
 
+.img-loaded.loaded::after {
+    content: " x";
+    font-weight: 700;
+    color: red;
+    
     cursor: pointer;
 }
 
 .board {
+    margin: 10px 0px;
     position: relative;
     padding: 10px;
     width: 80vmin;
@@ -72,15 +88,17 @@ label,
     font-weight: 700;
 
     background-color: lightskyblue;
-    /* background: url(./IMG_01.JPG); */
+}
+.clickable:hover {
+    cursor: pointer;
 }
 
-.btn {
-    margin: 20px 10px;
+.btn, label.game-image {
     padding: 7px 15px;
 
     color: rgb(0, 42, 0);
-    font-size: 14px;
+    font-size: clamp(11px, 3vmin, 14px);
+    line-height: 150%;
     font-weight: 700;
     text-transform: uppercase;
 
@@ -100,7 +118,7 @@ label,
         cursor: pointer;
     }
 
-    .btn:hover {
+    .btn:hover, label.game-image:hover {
         outline: 1px solid black;
     }
 }
